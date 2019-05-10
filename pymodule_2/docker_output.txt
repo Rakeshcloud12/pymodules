@@ -1,0 +1,79 @@
+(base) [w1427883@localhost pymodules]$ sudo docker-compose build
+[sudo] password for w1427883: 
+Building basic-service
+Step 1/20 : FROM ubuntu:16.04
+ ---> a3551444fc85
+Step 2/20 : MAINTAINER RakeshD <rakesh.cloud12@gmail.com>
+ ---> Using cache
+ ---> 4a25ab32e8af
+Step 3/20 : ENV PYTHONUNBUFFERED 1
+ ---> Using cache
+ ---> f4953ef9ec3e
+Step 4/20 : RUN apt-get update -y &&     apt-get install -y python-pip python-dev
+ ---> Using cache
+ ---> abf227adbc68
+Step 5/20 : RUN apt-get install -y software-properties-common vim
+ ---> Using cache
+ ---> 162c268e3c57
+Step 6/20 : RUN add-apt-repository ppa:deadsnakes/ppa
+ ---> Using cache
+ ---> 405c9fffafbb
+Step 7/20 : RUN add-apt-repository ppa:jonathonf/python-3.6
+ ---> Using cache
+ ---> 157324c892ed
+Step 8/20 : RUN apt-get update
+ ---> Using cache
+ ---> 4588e1af15c9
+Step 9/20 : RUN apt-get install -y python3.6 python3.6-dev python3-pip python3.6-venv
+ ---> Using cache
+ ---> 734936afafba
+Step 10/20 : RUN ln -sfn /usr/bin/python3.6 /usr/bin/python3 && ln -sfn /usr/bin/python3 /usr/bin/python && ln -sfn /usr/bin/pip3 /usr/bin/pip
+ ---> Using cache
+ ---> aaaf46883326
+Step 11/20 : RUN mkdir -p /usr/src/app
+ ---> Using cache
+ ---> 7c7ebe9c1d67
+Step 12/20 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> cc9cd4430750
+Step 13/20 : COPY requirements.txt /usr/src/app/
+ ---> Using cache
+ ---> 01f6ae844cd6
+Step 14/20 : RUN pip install --upgrade pip
+ ---> Using cache
+ ---> 5118d80b4b86
+Step 15/20 : RUN pip3 install --no-cache-dir -r requirements.txt --upgrade
+ ---> Using cache
+ ---> 80026f28d11a
+Step 16/20 : RUN pip3 install connexion[swagger-ui]
+ ---> Using cache
+ ---> 8c39a3ff48d0
+Step 17/20 : COPY . /usr/src/app
+ ---> a708efcc0cf0
+Step 18/20 : EXPOSE 8082
+ ---> Running in 02a663645693
+Removing intermediate container 02a663645693
+ ---> b0ee0a1cc06e
+Step 19/20 : ENTRYPOINT [ "gunicorn" ]
+ ---> Running in 88ff59ffb463
+Removing intermediate container 88ff59ffb463
+ ---> 9e5af261aefe
+Step 20/20 : CMD ["-w", "2", "-b", "0.0.0.0:8082", "basic.wsgi"]
+ ---> Running in abb6b8156f3c
+Removing intermediate container abb6b8156f3c
+ ---> bbcb976fefd5
+Successfully built bbcb976fefd5
+Successfully tagged pymodules_basic-service:latest
+(base) [w1427883@localhost pymodules]$ 
+(base) [w1427883@localhost pymodules]$ 
+(base) [w1427883@localhost pymodules]$ 
+(base) [w1427883@localhost pymodules]$ 
+(base) [w1427883@localhost pymodules]$ 
+(base) [w1427883@localhost pymodules]$ sudo docker-compose up
+Recreating pymodules_basic-service_1 ... done
+Attaching to pymodules_basic-service_1
+basic-service_1  | [2019-05-10 06:15:56 +0000] [1] [INFO] Starting gunicorn 19.9.0
+basic-service_1  | [2019-05-10 06:15:56 +0000] [1] [INFO] Listening at: http://0.0.0.0:8082 (1)
+basic-service_1  | [2019-05-10 06:15:56 +0000] [1] [INFO] Using worker: sync
+basic-service_1  | [2019-05-10 06:15:56 +0000] [8] [INFO] Booting worker with pid: 8
+basic-service_1  | [2019-05-10 06:15:56 +0000] [9] [INFO] Booting worker with pid: 9
